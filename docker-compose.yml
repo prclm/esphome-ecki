@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  esphome:
+    container_name: esphome
+    #image: esphome/esphome:beta
+    #image: esphome/esphome:dev
+    image: esphome/esphome:latest
+    # devices:
+    #  - "/dev/ttyUSB0:/dev/ttyUSB0"
+      # - "/dev/bus/usb:/dev/bus/usb"
+    # - "/dev/ttyS3:/dev/ttyUSB0"
+    privileged: true
+    environment:
+      - ESPHOME_DASHBOARD_USE_PING=true
+    volumes:
+      - ./config:/config
+    network_mode: bridge
+    ports:
+      - 6052:6052
+      # - 6152:6052
+      # - 6123:6123
+    restart: unless-stopped
